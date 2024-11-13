@@ -1,0 +1,57 @@
+ <!-- Research Insights Blog Section -->
+        <div
+          class="flex flex-col items-start p-6 bg-gray-800 rounded-lg shadow-lg"
+        >
+          <div class="text-yellow-500 mb-4">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2a10 10 0 110 20 10 10 0 010-20zM4 12l4 4v-3h8v-2H8V8l-4 4z"
+              />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Research Insights Blogs</h3>
+          <p class="text-gray-400">
+            Dive deep into future technology concepts with our research
+            section.
+          </p>
+        </div>
+
+        <!-- Depth Card -->
+        <div
+          class="p-6 bg-gray-800 rounded-lg shadow-lg transition-transform duration-200 transform hover:scale-105"
+        >
+          <h4 class="text-lg font-semibold mb-2">Depth</h4>
+          <p class="text-gray-400">
+            500+ research articles for in-depth understanding.
+          </p>
+        </div>
+
+        <!-- Graphics Card -->
+        <div
+          class="p-6 bg-gray-800 rounded-lg shadow-lg transition-transform duration-200 transform hover:scale-105"
+        >
+          <h4 class="text-lg font-semibold mb-2">Graphics</h4>
+          <p class="text-gray-400">
+            Visual aids and infographics to enhance comprehension.
+          </p>
+        </div>
+
+        <!-- Trends Card -->
+        <div
+          class="p-6 bg-gray-800 rounded-lg shadow-lg transition-transform duration-200 transform hover:scale-105"
+        >
+          <h4 class="text-lg font-semibold mb-2">Trends</h4>
+          <p class="text-gray-400">
+            Explore emerging trends in future technology research.
+          </p>
+        </div>
+
+        <!-- Contributors Card -->
+        <div
+          class="p-6 bg-gray-800 rounded-lg shadow-lg transition-transform duration-200 transform hover:scale-105"
+        >
+          <h4 class="text-lg font-semibold mb-2">Contributors</h4>
+          <p class="text-gray-400">
+            Contributions from tech researchers and academics.
+          </p>
+        </div>

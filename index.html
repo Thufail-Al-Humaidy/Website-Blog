@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EL Blog</title>
+    <link rel="stylesheet" href="src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- LINK ICON -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- LINK JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <!-- link slick -->
+    <link rel="stylesheet" href="./assets/slick/slick.css" />
+    <link rel="stylesheet" href="./assets/slick/slick-theme.scss " />
+  </head>
+  <body class="text-white bg-bg1 font-plex-mono" x-data="{ menuOpen: false }">
+    <header class="bg-bg2 shadow-lg">
+      <nav
+        class="container flex items-center justify-between py-4 mx-auto px-4 md:px-0"
+      >
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 overflow-hidden">
+            <img
+              src="assets/img/logo.png"
+              class="object-cover w-full"
+              alt="Logo"
+            />
+          </div>
+          <h1 class="md:text-2xl text-xl font-semibold text-white">EL Blog</h1>
+        </div>
+
+        <!-- Navigation Links for Desktop -->
+        <ul class="hidden md:flex gap-5 text-white">
+          <li class="hover:text-brand1 transition ease-in-out duration-200">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="hover:text-brand1 transition ease-in-out duration-200">
+            <a href="blog.html">Blog</a>
+          </li>
+          <li class="hover:text-brand1 transition ease-in-out duration-200">
+            <a href="author.html">Author</a>
+          </li>
+          <li class="hover:text-brand1 transition ease-in-out duration-200">
+            <a href="contact.html">Contact</a>
+          </li>
+          <li class="hover:text-brand1 transition ease-in-out duration-200">
+            <a href="signin.html">Sign-in</a>
+          </li>
+        </ul>
+
+        <!-- User Dropdown Menu -->
+        <div
+          x-data="{ open: false }"
+          class="relative hidden md:block text-white"
+        >
+          <button
+            @click="open = !open"
+            class="flex items-center gap-1 focus:outline-none"
+          >
+            <div
+              class="w-10 h-10 overflow-hidden rounded-full border-2 border-blue-400"
+            >
+              <img
+                src="assets/img/dizy/image.png"
+                class="object-cover w-full h-full"
+                alt="User Avatar"
+              />
+            </div>
+            <span class="font-medium">Hi Thufail</span>
+            <svg
+              :class="{ 'rotate-180': open }"
+              class="w-4 h-4 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </button>
+
+          <!-- Dropdown Content -->
+          <div
+            x-show="open"
+            @click.away="open = false"
+            x-transition:enter="transition ease-out duration-200 transform"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150 transform"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="absolute right-0 w-40 mt-2 bg-gray-700 rounded-md shadow-lg z-20"
+          >
+            <a
+              href="profile.html"
+              class="flex items-center justify-between px-4 py-2 hover:bg-indigo-700 transition duration-150"
+            >
+              Profile <i class="ph-thin ph-user-circle-gear text-2xl"></i>
+            </a>
+            <a
+              href="logout.html"
+              class="flex items-center justify-between px-4 py-2 hover:bg-indigo-700 transition duration-150"
+            >
+              Logout <i class="ph-thin ph-sign-out text-2xl"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          @click="menuOpen = !menuOpen"
+          class="block md:hidden text-white focus:outline-none"
+        >
+          <i class="text-2xl ph ph-list"></i>
+        </button>
+      </nav>
+    </header>
+    <div
+      x-show="menuOpen"
+      x-transition:enter="transition ease-out duration-300 transform"
+      x-transition:enter-start="translate-x-full"
+      x-transition:enter-end="translate-x-0"
+      x-transition:leave="transition ease-in duration-200 transform"
+      x-transition:leave-start="translate-x-0"
+      x-transition:leave-end="translate-x-full"
+      class="fixed inset-0 z-30 flex justify-end"
+    >
+      <aside class="bg-bg2 w-64 h-full p-6 shadow-lg text-white">
+        <button @click="menuOpen = false" class="text-right">
+          <i class="text-2xl ph ph-x"></i>
+        </button>
+        <ul class="mt-6 space-y-4">
+          <li class="hover:text-brand1"><a href="index.html">Home</a></li>
+          <li class="hover:text-brand1"><a href="blog.html">Blog</a></li>
+          <li class="hover:text-brand1"><a href="author.html">Author</a></li>
+          <li class="hover:text-brand1">
+            <a href="contact.html">Contact</a>
+          </li>
+          <li class="hover:text-brand1"><a href="signin.html">Sign-in</a></li>
+        </ul>
+        <!-- User Info for Mobile -->
+        <div class="mt-10 border-t border-gray-700 pt-4">
+          <div class="flex items-center gap-1">
+            <div
+              class="w-10 h-10 rounded-full border-2 border-blue-400 overflow-hidden"
+            >
+              <img
+                src="assets/img/dizy/image.png"
+                class="object-cover w-full h-full"
+                alt="User Avatar"
+              />
+            </div>
+            <span class="font-medium">Hi Thufail</span>
+          </div>
+          <div class="mt-4 space-y-2">
+            <a
+              href="profile.html"
+              class="flex items-center justify-between px-4 py-2 hover:bg-indigo-700 transition duration-150"
+            >
+              Profile <i class="ph-thin ph-user-circle-gear text-2xl"></i>
+            </a>
+            <a
+              href="logout.html"
+              class="flex items-center justify-between px-4 py-2 hover:bg-indigo-700 transition duration-150"
+            >
+              Logout <i class="ph-thin ph-sign-out text-2xl"></i>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <main class="container mx-auto px-6 py-16">
+      <div
+        class="sub-container flex flex-col md:flex-row gap-5 md:gap-0 items-center"
+      >
+        <div class="md:w-2/3">
+          <!-- Header Section -->
+          <div class="flex flex-col gap-5">
+            <p class="text-gray-300">Temukan Dunia Pengetahuan Islam</p>
+            <h1 class="md:text-5xl text-3xl font-bold font-bricolage">
+              Jelajahi Wawasan
+              <span class="text-brand1">Islamic Knowledge</span>
+            </h1>
+            <p class="text-gray-300 max-w-2xl">
+              Selamat datang di blog kami, tempat di mana kami membagikan
+              wawasan, ide, dan informasi tentang Islam, serta perkembangan
+              terbaru dalam dunia agama dan spiritualitas. Mari bergabung dalam
+              perjalanan untuk memperdalam pemahaman kita tentang Islam.
+            </p>
+          </div>
+          <!-- Stats Section -->
+          <div class="flex space-x-8 mt-12">
+            <div class=" ">
+              <p class="text-4xl font-bold text-brand1">500+</p>
+              <p class="text-gray-300">Artikel Islam Tersedia</p>
+            </div>
+            <div class=" ">
+              <p class="text-4xl font-bold text-brand1">15k+</p>
+              <p class="text-gray-300">Pembaca Bulanan</p>
+            </div>
+            <div class=" ">
+              <p class="text-4xl font-bold text-brand1">1k+</p>
+              <p class="text-gray-300">Komunitas Pengikut</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:w-1/3 h-full">
+          <img src="assets/img/blog/danau.png" alt="Blog Image" />
+        </div>
+      </div>
+
+      <!-- Explore Section -->
+      <div
+        class="flex flex-col md:flex-row justify-between md:items-center items-start gap-5 mt-16"
+      >
+        <div class="max-w-md">
+          <h2 class="text-2xl font-bold text-brand1">
+            Jelajahi Arsip Blog Kami
+          </h2>
+          <p class="text-gray-300 mt-2">
+            Temukan berbagai artikel mengenai pemahaman agama, kehidupan Islami,
+            dan topik terkait yang mendalam.
+          </p>
+          <button
+            class="mt-4 px-6 py-3 bg-brand1 text-gray-900 font-semibold rounded-lg hover:bg-brand2 transisi flex items-center space-x-2"
+          >
+            <span>Baca Blog</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-7H6a1 1 0 110-2h3V6a1 1 0 112 0v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="flex -space-x-4">
+          <!-- Avatar 1 -->
+          <div class="relative group">
+            <img
+              class="w-12 h-12 rounded-full border-2 border-brand1 group-hover:opacity-70 transisi"
+              src="assets/img/author/user-1.jpg"
+              alt="Author 1"
+            />
+            <span
+              class="absolute -top-7 left-0 right-0 bg-brand1 text-black text-xs text-center opacity-0 group-hover:opacity-100 transisi p-1 rounded-md"
+            >
+              Penulis 1
+            </span>
+          </div>
+          <!-- Avatar 2 -->
+          <div class="relative group">
+            <img
+              class="w-12 h-12 rounded-full border-2 border-brand1 group-hover:opacity-70 transisi"
+              src="assets/img/author/user-2.jpg"
+              alt="Author 2"
+            />
+            <span
+              class="absolute -top-7 left-0 right-0 bg-brand1 text-black text-xs text-center opacity-0 group-hover:opacity-100 transisi p-1 rounded-md"
+            >
+              Penulis 2
+            </span>
+          </div>
+          <!-- Avatar 3 -->
+          <div class="relative group">
+            <img
+              class="w-12 h-12 rounded-full border-2 border-brand1 group-hover:opacity-70 transisi"
+              src="assets/img/author/user-3.jpg"
+              alt="Author 3"
+            />
+            <span
+              class="absolute -top-7 left-0 right-0 bg-brand1 text-black text-xs text-center opacity-0 group-hover:opacity-100 transisi p-1 rounded-md"
+            >
+              Penulis 3
+            </span>
+          </div>
+          <!-- Avatar 4 -->
+          <div class="relative group">
+            <img
+              class="w-12 h-12 rounded-full border-2 border-brand1 group-hover:opacity-70 transisi"
+              src="assets/img/author/user-4.jpg"
+              alt="Author 4"
+            />
+            <span
+              class="absolute -top-7 left-0 right-0 bg-brand1 text-black text-xs text-center opacity-0 group-hover:opacity-100 transisi p-1 rounded-md"
+            >
+              Penulis 4
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Information Boxes -->
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="bg-bg2 p-6 rounded-lg hover:bg-grey transisi">
+          <div class="text-brand1 text-4xl mb-2">
+            <i class="ph ph-article-ny-times"></i>
+          </div>
+          <h3 class="font-bold font-bricolage">Artikel Terbaru</h3>
+          <p class="text-gray-300">Tetap Terupdate</p>
+          <p class="text-gray-300 mt-3">
+            Artikel baru setiap hari yang memperdalam pemahaman kita.
+          </p>
+        </div>
+        <div class="bg-bg2 p-6 rounded-lg hover:bg-grey transisi">
+          <div class="text-brand1 text-4xl mb-2">
+            <i class="ph ph-users"></i>
+          </div>
+          <h3 class="font-bold font-bricolage">Penulis Berpengalaman</h3>
+          <p class="text-gray-300">Pandangan Ahli</p>
+          <p class="text-gray-300 mt-3">
+            Penulis yang berkompeten dalam bidang agama Islam.
+          </p>
+        </div>
+        <div class="bg-bg2 p-6 rounded-lg hover:bg-grey transisi">
+          <div class="text-brand1 text-4xl mb-2">
+            <i class="ph ph-globe"></i>
+          </div>
+          <h3 class="font-bold font-bricolage">Pembaca Global</h3>
+          <p class="text-gray-300">Pengaruh di Seluruh Dunia</p>
+          <p class="text-gray-300 mt-3">Reaching readers in 100+ countries.</p>
+        </div>
+      </div>
+    </main>
+    <section class="bg-bg2 text-white">
+      <div class="container mx-auto flex flex-col p-4 py-8 md:px-6">
+        <!-- Header -->
+        <div class="text-center">
+          <p class="text-sm text-gray-300">Jelajahi Keutamaan</p>
+          <h2 class="text-4xl font-bold text-white">Fitur EL Blog Islami</h2>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="flex flex-col md:flex-row gap-4 items-center py-10">
+          <div class="sub-container md:w-1/3">
+            <!-- Blog Islami Section -->
+            <div class="flex flex-col items-start">
+              <div class="text-brand1 text-5xl mb-4">
+                <i class="ph ph-article-ny-times"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 font-bricolage md:text-3xl">
+                Blog Islami untuk Inspirasi
+              </h3>
+              <p class="text-gray-400">
+                Temukan artikel-artikel Islami untuk memperdalam pemahaman dan
+                inspirasi keislaman Anda.
+              </p>
+            </div>
+          </div>
+          <div
+            class="sub-container md:w-2/3 grid md:grid-cols-2 gap-4 px-3 items-center"
+          >
+            <!-- Keberkahan Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Keberkahan
+              </h4>
+              <p class="text-gray-400">
+                Lebih dari 1.000 artikel yang mendalam tentang keutamaan Islam
+                dan hidup dengan penuh keberkahan.
+              </p>
+            </div>
+
+            <!-- Ragam Topik Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Ragam Topik
+              </h4>
+              <p class="text-gray-400">
+                Artikel mencakup topik seperti fikih, tafsir, kisah Nabi, dan
+                kehidupan Islami.
+              </p>
+            </div>
+
+            <!-- Update Rutin Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Update Rutin
+              </h4>
+              <p class="text-gray-400">
+                Konten baru setiap hari untuk menjaga semangat dan pengetahuan
+                Anda tetap segar.
+              </p>
+            </div>
+
+            <!-- Penulis Ahli Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Penulis Ahli
+              </h4>
+              <p class="text-gray-400">
+                Ditulis oleh tim ahli yang memahami nilai-nilai Islam.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div
+          class="flex flex-col md:flex-row gap-4 items-center border-t border-t-brand1 py-10"
+        >
+          <div class="sub-container md:w-1/3">
+            <!-- Inspirasi Islami Section -->
+            <div class="flex flex-col items-start">
+              <div class="text-brand1 text-5xl mb-4">
+                <i class="ph ph-article-ny-times"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 font-bricolage md:text-3xl">
+                Inspirasi dari EL Blog
+              </h3>
+              <p class="text-gray-400">
+                Dapatkan panduan Islami dan inspirasi untuk kehidupan
+                sehari-hari dari EL Blog.
+              </p>
+            </div>
+          </div>
+          <div
+            class="sub-container md:w-2/3 grid md:grid-cols-2 gap-4 px-3 items-center"
+          >
+            <!-- Nilai Spiritualitas Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Nilai Spiritualitas
+              </h4>
+              <p class="text-gray-400">
+                Artikel untuk memperkuat hubungan dengan Allah dan memperdalam
+                spiritualitas.
+              </p>
+            </div>
+
+            <!-- Panduan Ibadah Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Panduan Ibadah
+              </h4>
+              <p class="text-gray-400">
+                Tips praktis dan panduan untuk ibadah harian seperti shalat,
+                puasa, dan zakat.
+              </p>
+            </div>
+
+            <!-- Kisah Hikmah Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Kisah Hikmah
+              </h4>
+              <p class="text-gray-400">
+                Kisah inspiratif dari Al-Quran dan kehidupan Nabi untuk
+                meningkatkan iman.
+              </p>
+            </div>
+
+            <!-- Artikel Pengetahuan Card -->
+            <div class="p-6 bg-bg1 rounded-lg shadow-lg transisi hover:bg-grey">
+              <h4 class="font-semibold mb-2 font-bricolage text-brand1">
+                Artikel Pengetahuan
+              </h4>
+              <p class="text-gray-400">
+                Berbagai topik pengetahuan Islami yang mendidik dan memperkaya
+                wawasan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="">
+      <div class="container mx-auto px-4 py-8">
+        <h2
+          class="text-2xl md:text-4xl font-semibold mb-4 font-bricolage text-center"
+        >
+          Penulis Populer
+        </h2>
+        <p class="text-gray-400 mb-8 text-center">
+          Kumpulan Ilmu dan Inspirasi Islami
+        </p>
+
+        <!-- Categories -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8">
+          <button class="px-4 py-2 bg-bg2 hover:bg-blue-950 rounded transisi">
+            Semua
+          </button>
+          <button class="px-4 py-2 bg-bg2 hover:bg-blue-950 rounded transisi">
+            Aqidah
+          </button>
+          <button class="px-4 py-2 bg-bg2 hover:bg-blue-950 rounded transisi">
+            Fiqih
+          </button>
+          <button class="px-4 py-2 bg-bg2 hover:bg-blue-950 rounded transisi">
+            Tarbiyyah
+          </button>
+          <button class="px-4 py-2 bg-bg2 hover:bg-blue-950 rounded transisi">
+            Tafsir
+          </button>
+          <button class="px-4 py-2 bg-bg2 hover:bg-blue-950 rounded transisi">
+            Sejarah
+          </button>
+        </div>
+
+        <!-- Blog Cards -->
+        <div class="slider">
+          <!-- Blog Post 1 -->
+          <div
+            class="p-4 bg-bg2 rounded-lg hover:bg-blue-950 transisi w-[400px] h-[300px]"
+          >
+            <div class="flex items-center space-x-4">
+              <img
+                class="w-12 h-12 rounded-full"
+                src="assets/img/author/user-1.jpg"
+                alt="Author Image"
+              />
+              <div>
+                <h4 class="text-gray-400 font-semibold">Ahmad Abdullah</h4>
+                <p class="text-sm text-gray-400">Sejarah Islam</p>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-400 font-semibold">
+              Menggali Nilai dari Sejarah Islam
+            </p>
+            <p class="mt-2 text-gray-400">
+              Memahami pelajaran berharga dari kejayaan dan tantangan yang
+              dihadapi umat Islam di masa lalu.
+            </p>
+            <div
+              class="flex flex-col lg:flex-row mt-4 gap-2 items-start md:items-center justify-between"
+            >
+              <div class="sub-container flex items-center gap-3">
+                <span class="flex items-center gap-1"
+                  ><p>15k</p>
+                  <i class="ph ph-heart text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>40</p>
+                  <i class="ph ph-chat text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>10</p>
+                  <i class="ph ph-upload text-brand1 text-xl"></i
+                ></span>
+              </div>
+              <a href="#" class="text-teal-400 hover:underline"
+                >Lihat Artikel →</a
+              >
+            </div>
+          </div>
+
+          <!-- Blog Post 2 -->
+          <div
+            class="p-4 bg-bg2 rounded-lg hover:bg-blue-950 transisi w-[400px] h-[300px]"
+          >
+            <div class="flex items-center space-x-4">
+              <img
+                class="w-12 h-12 rounded-full"
+                src="assets/img/author/user-2.jpg"
+                alt="Author Image"
+              />
+              <div>
+                <h4 class="text-gray-400 font-semibold">Fatimah Azhari</h4>
+                <p class="text-sm text-gray-400">Aqidah & Akhlak</p>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-400 font-semibold">
+              Membangun Keimanan yang Kokoh
+            </p>
+            <p class="mt-2 text-gray-400">
+              Panduan untuk memperkuat keyakinan dan memperbaiki akhlak sesuai
+              ajaran Islam.
+            </p>
+            <div
+              class="flex flex-col lg:flex-row mt-4 gap-2 items-start md:items-center justify-between"
+            >
+              <div class="sub-container flex items-center gap-3">
+                <span class="flex items-center gap-1"
+                  ><p>12k</p>
+                  <i class="ph ph-heart text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>22</p>
+                  <i class="ph ph-chat text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>8</p>
+                  <i class="ph ph-upload text-brand1 text-xl"></i
+                ></span>
+              </div>
+              <a href="#" class="text-teal-400 hover:underline"
+                >Lihat Artikel →</a
+              >
+            </div>
+          </div>
+          <!-- Blog Post 2 -->
+          <div
+            class="p-4 bg-bg2 rounded-lg hover:bg-blue-950 transisi w-[400px] h-[300px]"
+          >
+            <div class="flex items-center space-x-4">
+              <img
+                class="w-12 h-12 rounded-full"
+                src="assets/img/author/user-2.jpg"
+                alt="Author Image"
+              />
+              <div>
+                <h4 class="text-gray-400 font-semibold">Fatimah Azhari</h4>
+                <p class="text-sm text-gray-400">Aqidah & Akhlak</p>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-400 font-semibold">
+              Membangun Keimanan yang Kokoh
+            </p>
+            <p class="mt-2 text-gray-400">
+              Panduan untuk memperkuat keyakinan dan memperbaiki akhlak sesuai
+              ajaran Islam.
+            </p>
+            <div
+              class="flex flex-col lg:flex-row mt-4 gap-2 items-start md:items-center justify-between"
+            >
+              <div class="sub-container flex items-center gap-3">
+                <span class="flex items-center gap-1"
+                  ><p>12k</p>
+                  <i class="ph ph-heart text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>22</p>
+                  <i class="ph ph-chat text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>8</p>
+                  <i class="ph ph-upload text-brand1 text-xl"></i
+                ></span>
+              </div>
+              <a href="#" class="text-teal-400 hover:underline"
+                >Lihat Artikel →</a
+              >
+            </div>
+          </div>
+          <!-- Blog Post 2 -->
+          <div
+            class="p-4 bg-bg2 rounded-lg hover:bg-blue-950 transisi w-[400px] h-[300px]"
+          >
+            <div class="flex items-center space-x-4">
+              <img
+                class="w-12 h-12 rounded-full"
+                src="assets/img/author/user-2.jpg"
+                alt="Author Image"
+              />
+              <div>
+                <h4 class="text-gray-400 font-semibold">Fatimah Azhari</h4>
+                <p class="text-sm text-gray-400">Aqidah & Akhlak</p>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-400 font-semibold">
+              Membangun Keimanan yang Kokoh
+            </p>
+            <p class="mt-2 text-gray-400">
+              Panduan untuk memperkuat keyakinan dan memperbaiki akhlak sesuai
+              ajaran Islam.
+            </p>
+            <div
+              class="flex flex-col lg:flex-row mt-4 gap-2 items-start md:items-center justify-between"
+            >
+              <div class="sub-container flex items-center gap-3">
+                <span class="flex items-center gap-1"
+                  ><p>12k</p>
+                  <i class="ph ph-heart text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>22</p>
+                  <i class="ph ph-chat text-brand1 text-xl"></i
+                ></span>
+                <span class="flex items-center gap-1"
+                  ><p>8</p>
+                  <i class="ph ph-upload text-brand1 text-xl"></i
+                ></span>
+              </div>
+              <a href="#" class="text-teal-400 hover:underline"
+                >Lihat Artikel →</a
+              >
+            </div>
+          </div>
+
+          <!-- Additional Blog Cards (duplicate format) -->
+        </div>
+      </div>
+    </section>
+    <section class="bg-bg2">
+      <div class="container mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <p class="text-sm">Jelajahi Pengetahuan Islami</p>
+          <h2 class="text-3xl font-semibold mt-2 font-bricolage">
+            Temukan Inspirasi dari Artikel Islami Terbaik
+          </h2>
+          <a href="#" class="text-teal-400 mt-3 inline-block hover:underline">
+            Lihat Semua Artikel →
+          </a>
+        </div>
+
+        <!-- Tag Teratas -->
+        <div class="flex flex-col gap-2 mb-8">
+          <div class="">
+            <h3 class="text-xl font-semibold">#Tag Teratas</h3>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            <button class="px-4 py-2 bg-bg1 hover:bg-teal-800 rounded transisi">
+              #Aqidah
+            </button>
+            <button class="px-4 py-2 bg-bg1 hover:bg-teal-800 rounded transisi">
+              #Fiqih
+            </button>
+            <button class="px-4 py-2 bg-bg1 hover:bg-teal-800 rounded transisi">
+              #Tarbiyyah
+            </button>
+            <button class="px-4 py-2 bg-bg1 hover:bg-teal-800 rounded transisi">
+              #Tafsir
+            </button>
+            <button class="px-4 py-2 bg-bg1 hover:bg-teal-800 rounded transisi">
+              #Sejarah
+            </button>
+            <button class="px-4 py-2 bg-bg1 hover:bg-teal-800 rounded transisi">
+              #Filsafat
+            </button>
+            <button class="px-4 py-2 bg-bg1 hover:bg-teal-800 rounded transisi">
+              #Pendidikan
+            </button>
+          </div>
+        </div>
+
+        <!-- Featured Article Section -->
+        <div class="mb-12">
+          <div
+            class="rounded-lg bg-bg1 p-4 flex flex-col md:flex-row items-center gap-6"
+          >
+            <img
+              src="assets/img/blog/danau.png"
+              alt="Artikel Utama"
+              class="w-full md:w-1/2 rounded-lg object-cover"
+            />
+            <div class="flex flex-col w-full md:w-1/2">
+              <p class="text-brand1 font-bricolage font-semibold">
+                Artikel Trending
+              </p>
+              <h3 class="text-2xl font-bold mt-2">
+                "Keutamaan Shalat Malam dalam Kehidupan Sehari-hari"
+              </h3>
+              <div class="author mt-2 flex gap-2">
+                <img
+                  src="assets/img/author/user-1.jpg"
+                  alt="Author Image"
+                  class="w-12 h-12 rounded-full border-2 border-brand1"
+                />
+                <p class="text-gray-200 flex flex-col">
+                  <span class="font-semibold text-brand1"
+                    >Ustadz Ahmad Fauzi</span
+                  >
+
+                  <span class="text-brand2">15 Oktober 2024</span>
+                </p>
+              </div>
+              <p class="text-gray-300 mt-4">
+                Artikel ini membahas keuta shalat malam dan bagaimana amalan
+                tersebut dapat memberikan ketenangan hati serta memperkuat iman.
+                Pelajari lebih dalam tentang keutamaan shalat malam dari
+                pandangan Islam.
+              </p>
+              <a
+                href="#"
+                class="text-teal-400 mt-4 inline-block hover:underline"
+              >
+                Baca Selengkapnya →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Articles Section -->
+        <div class="mb-12">
+          <h3 class="text-xl font-semibold mb-4 font-bricolage">
+            Artikel Terbaru
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Article Card -->
+            <div class="bg-bg1 p-6 rounded-lg shadow-md">
+              <p class="text-brand1 font-bricolage font-semibold">Artikel</p>
+              <h4 class="text-lg font-bold mt-2 font-bricolage">
+                "Meneladani Kesabaran Nabi Muhammad SAW"
+              </h4>
+              <div class="author mt-2 flex gap-2">
+                <img
+                  src="assets/img/author/user-1.jpg"
+                  alt="Author Image"
+                  class="w-12 h-12 rounded-full border-2 border-brand1"
+                />
+                <p class="text-gray-200 flex flex-col">
+                  <span class="font-semibold text-brand1"
+                    >Ustadz Ahmad Fauzi</span
+                  >
+
+                  <span class="text-brand2">15 Oktober 2024</span>
+                </p>
+              </div>
+              <p class="text-gray-300 mt-3">
+                Pelajari kisah kesabaran Nabi Muhammad SAW dan bagaimana kita
+                dapat meneladani sifat beliau dalam kehidupan sehari-hari.
+              </p>
+              <a
+                href="#"
+                class="text-teal-400 mt-4 inline-block hover:underline"
+              >
+                Baca Artikel →
+              </a>
+            </div>
+            <!-- Another Article Card -->
+            <div class="bg-bg1 p-6 rounded-lg shadow-md">
+              <p class="text-brand1 font-bricolage font-semibold">Artikel</p>
+              <h4 class="text-lg font-bold mt-2 font-bricolage">
+                "Pentingnya Ilmu Tauhid dalam Kehidupan"
+              </h4>
+              <div class="author mt-2 flex gap-2">
+                <img
+                  src="assets/img/author/user-1.jpg"
+                  alt="Author e"
+                  class="w-12 h-12 rounded-full border-2 border-brand1"
+                />
+                <p class="text-gray-200 flex flex-col">
+                  <span class="font-semibold text-brand1"
+                    >Ustadz Ahmad Fauzi</span
+                  >
+
+                  <span class="text-brand2">15 Oktober 2024</span>
+                </p>
+              </div>
+              <p class="text-gray-300 mt-3">
+                Artikel ini membahas pentingnya memahami ilmu tauhid sebagai
+                pondasi iman yang kuat dalam menghadapi tantangan hidup.
+              </p>
+              <a
+                href="#"
+                class="text-teal-400 mt-4 inline-block hover:underline"
+              >
+                Baca Artikel →
+              </a>
+            </div>
+            <!-- Another Article Card -->
+            <div class="bg-bg1 p-6 rounded-lg shadow-md">
+              <p class="text-brand1 font-bricolage font-semibold">Artikel</p>
+              <h4 class="text-lg font-bold mt-2 font-bricolage">
+                "Meningkatkan Keimanan di Bulan Suci"
+              </h4>
+              <div class="author mt-2 flex gap-2">
+                <img
+                  src="assets/img/author/user-1.jpg"
+                  alt="Author e"
+                  class="w-12 h-12 rounded-full border-2 border-brand1"
+                />
+                <p class="text-gray-200 flex flex-col">
+                  <span class="font-semibold text-brand1"
+                    >Ustadz Ahmad Fauzi</span
+                  >
+
+                  <span class="text-brand2">15 Oktober 2024</span>
+                </p>
+              </div>
+              <p class="text-gray-300 mt-3">
+                Pelajari cara-cara meningkatkan keimanan di bulan suci Ramadan,
+                dengan memperbanyak ibadah dan memperbaiki akhlak.
+              </p>
+              <a
+                href="#"
+                class="text-teal-400 mt-4 inline-block hover:underline"
+              >
+                Baca Artikel →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Authors Section -->
+        <div class="p-6 bg-bg1 rounded-lg text-center">
+          <h3 class="text-xl font-semibold">Tentang Penulis</h3>
+          <p class="text-gray-200 flex flex-col">
+            Artikel-artikel kami ditulis oleh para ulama dan pakar dengan
+            pengalaman lebih dari 10 tahun, menyajikan pandangan Islami yang
+            kaya akan ilmu dan bimbingan spiritual.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="bg-bg1 lg:px-12">
+      <div class="container mx-auto text-center px-6 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+          <span class="inline-block text-sm text-gray-400 mb-2"
+            >Pendapat Pembaca Kami</span
+          >
+          <h2 class="text-3xl font-bold mb-4 text-white font-bricolage">
+            Kata Mereka tentang Kami
+          </h2>
+          <a
+            href="#"
+            class="text-yellow-400 hover:text-yellow-300 font-semibold"
+          >
+            Lihat Semua Testimoni <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Testimonial Card 1 -->
+          <div class="bg-bg2 rounded-lg p-4 flex flex-col gap-6">
+            <div class="flex justify-center items-center">
+              <img
+                src="assets/img/author/user-1.jpg"
+                alt="Amira"
+                class="w-12 h-12 rounded-full border-2 border-brand1"
+              />
+              <div class="ml-3 text-left">
+                <p class="font-semibold text-white">Amira Rahman</p>
+                <p class="text-gray-400 text-sm">Jakarta, Indonesia</p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col items-center bg-gray-700 p-4 border border-gray-600 rounded-lg shadow-md relative"
+            >
+              <div
+                class="text-brand1 flex px-2 py-1 rounded-full absolute -top-5 bg-bg1 border border-gray-700 shadow-sm"
+              >
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <p class="text-gray-300 mt-4">
+                Blog ini memiliki koleksi artikel yang mendalam dan berkualitas.
+                Saya merasa sangat terbantu dalam memperluas wawasan, terutama
+                dalam kajian Islam dan teknologi.
+              </p>
+            </div>
+          </div>
+
+          <!-- Testimonial Card 2 -->
+          <div class="bg-bg2 rounded-lg p-4 flex flex-col gap-6">
+            <div class="flex justify-center items-center">
+              <img
+                src="assets/img/author/user-2.jpg"
+                alt="Rizky"
+                class="w-12 h-12 rounded-full border-2 border-brand1"
+              />
+              <div class="ml-3 text-left">
+                <p class="font-semibold text-white">Rizky Santoso</p>
+                <p class="text-gray-400 text-sm">Surabaya, Indonesia</p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col items-center bg-gray-700 p-4 border border-gray-600 rounded-lg shadow-md relative"
+            >
+              <div
+                class="text-brand1 flex px-2 py-1 rounded-full absolute -top-5 bg-bg1 border border-gray-700 shadow-sm"
+              >
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <p class="text-gray-300 mt-4">
+                Setiap artikel yang dipublikasikan benar-benar memberi
+                inspirasi. Saya terutama suka topik yang membahas fiqih modern.
+                Terasa relevan dan praktis!
+              </p>
+            </div>
+          </div>
+
+          <!-- Testimonial Card 3 -->
+          <div class="bg-bg2 rounded-lg p-4 flex flex-col gap-6">
+            <div class="flex justify-center items-center">
+              <img
+                src="assets/img/author/user-3.jpg"
+                alt="Lina"
+                class="w-12 h-12 rounded-full border-2 border-brand1"
+              />
+              <div class="ml-3 text-left">
+                <p class="font-semibold text-white">Lina Chen</p>
+                <p class="text-gray-400 text-sm">Singapore</p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col items-center bg-gray-700 p-4 border border-gray-600 rounded-lg shadow-md relative"
+            >
+              <div
+                class="text-brand1 flex px-2 py-1 rounded-full absolute -top-5 bg-bg1 border border-gray-700 shadow-sm"
+              >
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <p class="text-gray-300 mt-4">
+                I love the diversity of topics on this blog. It's a great
+                resource for anyone looking to explore Islamic philosophy and
+                digital ethics.
+              </p>
+            </div>
+          </div>
+
+          <!-- Testimonial Card 4 -->
+          <div class="bg-bg2 rounded-lg p-4 hidden md:flex flex-col gap-6">
+            <div class="flex justify-center items-center">
+              <img
+                src="assets/img/author/user-4.jpg"
+                alt="Ahmed"
+                class="w-12 h-12 rounded-full border-2 border-brand1"
+              />
+              <div class="ml-3 text-left">
+                <p class="font-semibold text-white">Ahmed Al-Hassan</p>
+                <p class="text-gray-400 text-sm">Dubai, UAE</p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col items-center bg-gray-700 p-4 border border-gray-600 rounded-lg shadow-md relative"
+            >
+              <div
+                class="text-brand1 flex px-2 py-1 rounded-full absolute -top-5 bg-bg1 border border-gray-700 shadow-sm"
+              >
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <p class="text-gray-300 mt-4">
+                The articles on Tarbiyyah have been transformative for me. They
+                offer practical guidance on personal development and
+                spirituality.
+              </p>
+            </div>
+          </div>
+
+          <!-- Testimonial Card 5 -->
+          <div class="bg-bg2 rounded-lg p-4 hidden md:flex flex-col gap-6">
+            <div class="flex justify-center items-center">
+              <img
+                src="assets/img/author/user-5.jpg"
+                alt="Nurul"
+                class="w-12 h-12 rounded-full border-2 border-brand1"
+              />
+              <div class="ml-3 text-left">
+                <p class="font-semibold text-white">Nurul Hidayati</p>
+                <p class="text-gray-400 text-sm">Bandung, Indonesia</p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col items-center bg-gray-700 p-4 border border-gray-600 rounded-lg shadow-md relative"
+            >
+              <div
+                class="text-brand1 flex px-2 py-1 rounded-full absolute -top-5 bg-bg1 border border-gray-700 shadow-sm"
+              >
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <p class="text-gray-300 mt-4">
+                Pembahasan aqidah dan tafsir di sini sangat membantu pemahaman
+                saya. Sumber daya yang berharga untuk siapa saja yang mendalami
+                Islam.
+              </p>
+            </div>
+          </div>
+
+          <!-- Testimonial Card 6 -->
+          <div class="bg-bg2 rounded-lg p-4 hidden md:flex flex-col gap-6">
+            <div class="flex justify-center items-center">
+              <img
+                src="assets/img/author/user-6.jpg"
+                alt="Yusuf"
+                class="w-12 h-12 rounded-full border-2 border-brand1"
+              />
+              <div class="ml-3 text-left">
+                <p class="font-semibold text-white">Yusuf Ibrahim</p>
+                <p class="text-gray-400 text-sm">Kuala Lumpur, Malaysia</p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col items-center bg-gray-700 p-4 border border-gray-600 rounded-lg shadow-md relative"
+            >
+              <div
+                class="text-brand1 flex px-2 py-1 rounded-full absolute -top-5 bg-bg1 border border-gray-700 shadow-sm"
+              >
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <p class="text-gray-300 mt-4">
+                Topik teknologi dan etika yang dibahas di blog ini sangat
+                relevan dengan pekerjaan saya. Sangat informatif dan insightful!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-bg2 py-16 px-6 lg:px-8 text-white">
+      <!-- Top Section -->
+      <div class="text-center mb-12">
+        <span
+          class="inline-block bg-gray-700 text-gray-300 text-sm py-1 px-3 rounded-full"
+          >Jelajahi, Terhubung, dan Berinovasi</span
+        >
+        <h2 class="text-4xl font-bold mt-4">
+          Bergabunglah dengan Masa Depan Blogging Islami
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto mt-4">
+          Selami dunia Islam. Akses artikel-artikel bermanfaat, terhubung dengan
+          komunitas penggemar Islam, dan tetap terinformasi tentang inovasi
+          terbaru yang membentuk umat. Jadilah bagian dari komunitas yang
+          berpikiran maju.
+        </p>
+      </div>
+
+      <!-- Resource Cards Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <!-- Card 1 -->
+        <div
+          class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-teal-500 text-gray-900 p-2 rounded-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white ml-4">
+              Artikel Mendalam
+            </h3>
+          </div>
+          <p class="text-gray-400 mb-4">
+            Temukan artikel-artikel yang membahas beragam topik Islam, dari
+            teknologi dalam Islam hingga sejarah peradaban.
+          </p>
+          <a
+            href="#"
+            class="text-brand1 font-semibold hover:underline inline-flex items-center"
+          >
+            Baca Selengkapnya <span class="ml-1">→</span>
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div
+          class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-teal-500 text-gray-900 p-2 rounded-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white ml-4">
+              Terhubung dengan Komunitas
+            </h3>
+          </div>
+          <p class="text-gray-400 mb-4">
+            Bergabunglah dengan diskusi komunitas kami, berbagi ide, dan
+            dapatkan wawasan dari para profesional dan penggemar Islam.
+          </p>
+          <a
+            href="#"
+            class="text-brand1 font-semibold hover:underline inline-flex items-center"
+          >
+            Ikut Bergabung <span class="ml-1">→</span>
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div
+          class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-teal-500 text-gray-900 p-2 rounded-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white ml-4">
+              Tetap Terinformasi
+            </h3>
+          </div>
+          <p class="text-gray-400 mb-4">
+            Dapatkan berita terbaru tentang acara Islam, webinar, dan banyak
+            lagi untuk tetap mengikuti tren dan perkembangan umat.
+          </p>
+          <a
+            href="#"
+            class="text-brand1 font-semibold hover:underline inline-flex items-center"
+          >
+            Pelajari Lebih Lanjut <span class="ml-1">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <footer class="mt-16 border-t border-gray-700  py-5">
+      <div class="container mx-auto">
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 text-sm text-gray-400"
+        >
+          <!-- Column 1 -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Jelajahi</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-brand1">Pos Terbaru</a></li>
+              <li><a href="#" class="hover:text-brand1">Topik</a></li>
+              <li><a href="#" class="hover:text-brand1">Sumber Daya</a></li>
+              <li><a href="#" class="hover:text-brand1">Testimoni</a></li>
+              <li><a href="#" class="hover:text-brand1">Kontak Kami</a></li>
+              <li><a href="#" class="hover:text-brand1">Newsletter</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 2 -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Tren Islami</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="hover:text-brand1">Berita Islam Terkini</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1">Penelitian Islam</a>
+              </li>
+              <li><a href="#" class="hover:text-brand1">Start-up Islami</a></li>
+              <li>
+                <a href="#" class="hover:text-brand1">Teknologi dalam Islam</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1">Kesehatan dalam Islam</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >Inovasi Ramah Lingkungan</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 3 -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Topik Populer</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >AI & Pembelajaran Mesin</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1">Blockchain dalam Islam</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >Keamanan Siber dalam Islam</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >Inovasi Teknologi Luar Angkasa</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >Energi Terbarukan dalam Islam</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >Bioteknologi dalam Islam</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 4 -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Podcast</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-brand1">Diskusi Islam</a></li>
+              <li>
+                <a href="#" class="hover:text-brand1">Inovasi dalam Islam</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >Wawasan Teknologi Islami</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-brand1"
+                  >Tren Masa Depan dalam Islam</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 5 -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Sumber Daya</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-brand1 font-semibold">Whitepapers</a>
+              </li>
+              <li><a href="#" class="text-brand1 font-semibold">Ebooks</a></li>
+              <li><a href="#" class="text-brand1 font-semibold">Laporan</a></li>
+              <li>
+                <a href="#" class="text-brand1 font-semibold"
+                  >Makalah Penelitian</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="mt-12 flex flex-col lg:flex-row items-center justify-between text-gray-500 text-sm"
+        >
+          <p>© 2024 El Blog. Semua hak dilindungi.</p>
+          <div class="flex space-x-4 mt-4 lg:mt-0 text-brand1 text-xl">
+            <a href="#" class="hover:text-white"
+              ><i class="ph ph-youtube-logo"></i
+            ></a>
+            <a href="#" class="hover:text-white"
+              ><i class="ph ph-article-ny-times"></i
+            ></a>
+            <a href="#" class="hover:text-white"
+              ><i class="ph ph-instagram-logo"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="./assets/jquery/jquery.js"></script>
+    <script src="./assets/slick/slick.min.js"></script>
+    <script src="assets/slick/slickjs.js"></script>
+
+    <script src="assets/js/navbar.js" defer></script>
+  </body>
+</html>
